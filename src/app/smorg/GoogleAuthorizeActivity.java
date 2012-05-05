@@ -29,8 +29,8 @@ public class GoogleAuthorizeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		accountManager= AccountManager.get(this);
 		//Remember user's login state
-	    CookieSyncManager.createInstance(getApplicationContext());
-
+	    //CookieSyncManager.createInstance(getApplicationContext());
+		showDialog();
 	}		
 	
 	protected void showDialog(){
@@ -38,17 +38,17 @@ public class GoogleAuthorizeActivity extends Activity {
 		newFragment.show(getFragmentManager(), "dialog");
 	}
 	
-	@Override
-	  protected void onPause() {
-	    super.onPause();
-	    CookieSyncManager.getInstance().stopSync();
-	  }
+	//@Override
+	//  protected void onPause() {
+	 //   super.onPause();
+	   // CookieSyncManager.getInstance().stopSync();
+	  //}
 
-	  @Override
-	  protected void onResume() {
-	    super.onResume();
-	    CookieSyncManager.getInstance().startSync();
-	  }
+	 // @Override
+	 // protected void onResume() {
+	   // super.onResume();
+	    //CookieSyncManager.getInstance().startSync();
+	  //}
 	  
 
 	  
