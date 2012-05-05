@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, AnActivity!</string>
     <string name="app_name">SmOrg</string>
+    <string name="login">Sign In</string>
+    <string name="exit">Quit</string>
 
 </resources>
