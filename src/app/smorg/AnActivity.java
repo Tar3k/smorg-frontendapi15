@@ -1,7 +1,8 @@
+/*
+ * Splash screen activity ; this is where our app opens its eyes
+ */
+
 package app.smorg;
-
-
-
 
 
 import android.app.Activity;
