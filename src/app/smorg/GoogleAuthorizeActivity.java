@@ -23,6 +23,8 @@ public class GoogleAuthorizeActivity extends Activity {
 	
 	
 	private static final String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/calendar";
+			//"https://www.googleapis.com/auth/calendar";
+			//"oauth2:http://www.googleapis.com/auth/calendar";
 	AccountManager accountManager ;
 	Account account;
 	  
@@ -59,7 +61,7 @@ public class GoogleAuthorizeActivity extends Activity {
 	  protected void getAuthorization(Account account) {
 			// TODO Auto-generated method stub
 			this.account=account;
-			android:
+			
 			
 			accountManager.getAuthToken(account, AUTH_TOKEN_TYPE, null, this, new AccountManagerCallback<Bundle>() {
 			    
@@ -94,7 +96,6 @@ public class GoogleAuthorizeActivity extends Activity {
 				  AccountsDialog dialogFragment = new AccountsDialog();
 				  Bundle arguments = new Bundle();
 				  arguments.putInt("title", title);
-				  
 				  dialogFragment.setArguments(arguments);
 				  return dialogFragment;
 				  

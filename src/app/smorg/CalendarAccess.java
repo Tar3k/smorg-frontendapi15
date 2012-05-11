@@ -6,6 +6,7 @@ package app.smorg;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import com.google.api.client.extensions.android2.AndroidHttp;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.HttpTransport;
@@ -21,9 +22,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,7 +37,7 @@ public class CalendarAccess extends Activity {
 	private ArrayList<String> userCalendarId= new ArrayList<String>();
 	
 	private Calendar calendarService ;
-	
+	private HttpTransport transport;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +68,7 @@ public class CalendarAccess extends Activity {
 
 	private void setupCalendarConnection(final String accessToken) throws IOException {
 		
-		HttpTransport transport = AndroidHttp.newCompatibleTransport();
+		 transport = AndroidHttp.newCompatibleTransport();
 		GoogleCredential googleCredential = new GoogleCredential().setAccessToken(accessToken);
 		JacksonFactory jacksonFactory = new JacksonFactory();
 		
@@ -112,7 +111,7 @@ public class CalendarAccess extends Activity {
 			}	
 			
 			
-			//Passing the Calendar data to activity
+			showDialog();
 			
 			
 		} catch (IOException e) {
