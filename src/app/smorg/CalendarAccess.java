@@ -23,6 +23,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -42,6 +43,8 @@ public class CalendarAccess extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
+               Log.d("MyAPP","Access Calendar");
+
 		//Getting the token back from authorization process
 		String accessToken = getIntent().getExtras().getString("token");
 		
@@ -60,14 +63,17 @@ public class CalendarAccess extends Activity {
 
 	private void showDialog() {
 		// TODO Auto-generated method stub
-		
+		                Log.d("MyAPP","choose a cal");
+
 		DialogFragment newFragment = new CalendarNamesDialog().instance("Choose Calendar:");
 		newFragment.show(getFragmentManager(), "dialog");
 		
 	}
 
 	private void setupCalendarConnection(final String accessToken) throws IOException {
-		
+	
+                Log.d("MyAPP","Setup calendar connection");
+
 		 transport = AndroidHttp.newCompatibleTransport();
 		GoogleCredential googleCredential = new GoogleCredential().setAccessToken(accessToken);
 		JacksonFactory jacksonFactory = new JacksonFactory();
@@ -77,26 +83,31 @@ public class CalendarAccess extends Activity {
 			@Override
 			public void initialize(JsonHttpRequest request) throws IOException {
 				CalendarRequest calendarRequest = (CalendarRequest) request;
-		        calendarRequest.setKey(API_KEY);
-		        calendarRequest.setOauthToken(accessToken);
+                                calendarRequest.setKey(API_KEY);
+                                calendarRequest.setOauthToken(accessToken);
 			}
 			
 		}).setHttpRequestInitializer(googleCredential).build();
-		
+                
+                Log.d("MyAPP","Lets get user calendars");
+
 		getUserCalendars(calendarService);
 		
 	}
 
 
 	private void getUserCalendars(Calendar calendarService) {
-		
+		                Log.d("MyAPP","Inside the function");
+
 		try {
 			CalendarList calendarList = calendarService.calendarList().list().execute();
-			
+			                Log.d("MyAPP","before while");
+
 			while(true){
 				for (CalendarListEntry calendarListEntry : calendarList.getItems()){
 					// do something
-			
+                                                        Log.d("MyAPP","looping on calendars ");
+
 					System.out.print(calendarListEntry.getSummary());
 					System.out.print(calendarListEntry.getId());
 					
@@ -123,7 +134,9 @@ public class CalendarAccess extends Activity {
 	
 	private void addEventToCalendar(int which) {
 		// TODO Auto-generated method stub
-		setContentView(R.layout.quick_add_event);
+                Log.d("MyAPP","quick event ya sidi");
+
+                setContentView(R.layout.quick_add_event);
 		final int index = which;
 		TextView textView = (TextView) findViewById(R.id.textView);
 		final EditText editText = (EditText) findViewById(R.id.quickadd);
@@ -140,6 +153,8 @@ public class CalendarAccess extends Activity {
 				// TODO Auto-generated method stub
 				try {
 					calendarService.events().quickAdd(calendarId , text ).execute();
+                                        Log.d("MyAPP","Event added!!!! ");
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

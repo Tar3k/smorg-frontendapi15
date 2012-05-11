@@ -18,6 +18,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 public class GoogleAuthorizeActivity extends Activity {
 	
@@ -33,6 +34,7 @@ public class GoogleAuthorizeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+                Log.d("MyAPP","Google Authorization Activity created");
 		accountManager= AccountManager.get(this);
 		//Remember user's login state
 	    //CookieSyncManager.createInstance(getApplicationContext());
@@ -40,6 +42,7 @@ public class GoogleAuthorizeActivity extends Activity {
 	}		
 	
 	protected void showDialog(){
+                Log.d("MyAPP","Show dialog to choose your Google account");
 		DialogFragment newFragment = new AccountsDialog().instance(R.string.app_name);
 		newFragment.show(getFragmentManager(), "dialog");
 	}
@@ -60,17 +63,21 @@ public class GoogleAuthorizeActivity extends Activity {
 	  
 	  protected void getAuthorization(Account account) {
 			// TODO Auto-generated method stub
-			this.account=account;
+                        Log.d("MyAPP","Get Authorization");
+
+                        this.account=account;
 			
 			
 			accountManager.getAuthToken(account, AUTH_TOKEN_TYPE, null, this, new AccountManagerCallback<Bundle>() {
 			    
 				public void run(AccountManagerFuture<Bundle> future) {
 			        try {
-			          // If the user has authorized your application to use the tasks API
+			          // If the user has authorized your application to use the calendar API
 			          // a token is available.
 			          String token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
 			          // Now you can use the  API...
+                                 Log.d("MyAPP","Token is ready");
+    
 			         Intent intent = new Intent().setClass(GoogleAuthorizeActivity.this,CalendarAccess.class);
 			         intent.putExtra("token", token);
 			         
