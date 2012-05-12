@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".AnActivity"
+            android:name=".SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".GoogleAuthorizeActivity"
+        <activity android:name=".GoogleAccountPrompt"
            	android:label="@string/app_name" >
            	</activity>
            	
-          <activity android:name=".CalendarAccess"
+          <activity android:name=".CalendarAuthorizeActivity"
            	android:label="@string/app_name" >
            	</activity>
      </application>

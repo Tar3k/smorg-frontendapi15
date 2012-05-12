@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 
 
-public class AnActivity extends Activity {
+public class SplashActivity extends Activity {
    
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,12 +34,13 @@ public class AnActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
+	
+            
 		switch (item.getItemId()) {
-	      // Start the WebViewActivity to handle the authentication.
-	      case R.id.login:
-	    	  Intent intent = new Intent().setClass(this,GoogleAuthorizeActivity.class);
-	    	  startActivity(intent);
+                    // Start the WebViewActivity to handle the authentication.
+                    case R.id.login:
+                    Intent intent = new Intent().setClass(this,GoogleAccountPrompt.class);
+                    startActivity(intent);
 	    	  
 	        return true;
 	      // Exit.
