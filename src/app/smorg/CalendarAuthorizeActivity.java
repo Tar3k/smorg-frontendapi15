@@ -4,10 +4,7 @@
 
 package app.smorg;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.*;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,6 +36,7 @@ public class CalendarAuthorizeActivity extends Activity {
         private JacksonFactory jacksonFactory;
 	private HttpTransport transport;
         private String accessToken;
+        private ProgressDialog progressDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +68,7 @@ public class CalendarAuthorizeActivity extends Activity {
 	private void setupCalendarConnection() {
 	
                 Log.d("MyAPP","Setup calendar connection");
+                progressDialog= ProgressDialog.show(this, "Please Wait", "Connecting to Google Calendar", true, false);
 
 		transport = AndroidHttp.newCompatibleTransport();
 		googleCredential = new GoogleCredential().setAccessToken(getAccessToken());
@@ -84,6 +83,7 @@ public class CalendarAuthorizeActivity extends Activity {
 			}
 		}).setHttpRequestInitializer(googleCredential).build();
                 
+                progressDialog.dismiss();
                 Log.d("MyAPP","Lets get user calendars");
                 
 		
@@ -96,15 +96,14 @@ public class CalendarAuthorizeActivity extends Activity {
             new UserGoogleCalendars().execute();
         }
 	
-	private void addEventToCalendar(int which) {
+	private void quickAddEvent(int  calendar) {
 	
             // TODO Auto-generated method stub
             Log.d("MyAPP","quick event ya sidi");
             setContentView(R.layout.quick_add_event);
-            final int index = which;
+            final int index = calendar;
             final EditText editText = (EditText) findViewById(R.id.quickadd);
             Button button = (Button) findViewById(R.id.setEvent);
-            
             button.setOnClickListener(new OnClickListener(){
                 
                 @Override
@@ -139,7 +138,7 @@ public class CalendarAuthorizeActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
 		
                         // TODO Auto-generated method stub
-                        addEventToCalendar(which);	
+                        quickAddEvent(which);	
                     }
                 }).create();
             }
@@ -150,8 +149,17 @@ public class CalendarAuthorizeActivity extends Activity {
        
         private class UserGoogleCalendars extends AsyncTask <Void,Void,Void> {
 
+      
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog= ProgressDialog.show(CalendarAuthorizeActivity.this, "Please Wait", "Getting Calendar..", true, false);
+            }
+
             @Override
             protected Void doInBackground(Void... params) {
+         
+
                 try {
                     CalendarList calendarList = calendarService.calendarList().list().execute();
                     Log.d("MyAPP","before while");
@@ -183,22 +191,40 @@ public class CalendarAuthorizeActivity extends Activity {
             protected void onPostExecute(Void result) {
                 Log.d("MyAPP", "Calendars Retrieved; Dialog should appear now y3ne");
                 showDialog();
+                progressDialog.dismiss();
             }
         }
         
         private class QuickAddEvent extends AsyncTask<String,Void,Void>{
 
+       
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+               progressDialog= ProgressDialog.show(CalendarAuthorizeActivity.this, "Please Wait", "Updating Google Calendar..", true, false);
+                
+            }
+
+            
             @Override
             protected Void doInBackground(String... params) {
-            
+                
+
                 try {
                     calendarService.events().quickAdd(params[0] , params[1] ).execute();
                     Log.d("MyAPP","Event added!!!! ");
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
+                    
                 }
                 return null;
            }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+        }
         }
         
 }

@@ -7,20 +7,23 @@
 package app.smorg;
 
 import android.accounts.*;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.*;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 
 public class GoogleAccountPrompt extends Activity {
 	
         private static final String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/calendar";
+        private static final String PREFS_ACC_NAME = "accountName";
+        private static final String PREFS_ACC_TOKEN= "authToken";
 	private AccountManager accountManager ;
 	private Account account;
+        private ProgressDialog progressDialog;
+        private SharedPreferences sharedPrefs;
 	  
 	
 	@Override
@@ -47,6 +50,8 @@ public class GoogleAccountPrompt extends Activity {
 	  protected void authorizeWithGoogle() {
 			// TODO Auto-generated method stub
               Log.d("MyAPP","Get Authorization");
+              
+              progressDialog= ProgressDialog.show(GoogleAccountPrompt.this,"Connecting","Authorizing your Google account, Please wait...",true,false);
               accountManager.getAuthToken(account, AUTH_TOKEN_TYPE, null, this, new AccountManagerCallback<Bundle>() {
 
                   public void run(AccountManagerFuture<Bundle> future) {
@@ -59,7 +64,9 @@ public class GoogleAccountPrompt extends Activity {
                           Log.d("MyAPP","Token is ready");
                           Intent intent = new Intent().setClass(GoogleAccountPrompt.this,CalendarAuthorizeActivity.class);
                           intent.putExtra("token", token);
+                          progressDialog.dismiss();
                           startActivity(intent);
+                          finish();
 			
                       } catch (OperationCanceledException e) {
 			    // TODO: The user has denied you access to the API, you should handle that

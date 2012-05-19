@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+        
    
     <EditText android:id="@+id/quickadd"
         android:layout_width="fill_parent"
@@ -11,9 +12,14 @@
     <Button android:id="@+id/setEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quick add Event"/>
+        android:text="@string/qadd" />  
     
-    
-    
+    <TextView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:maxLines="20"
+    android:text="@string/infos"
+    android:textSize="9dp"
+    />
 
+    
 </LinearLayout>

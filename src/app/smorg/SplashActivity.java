@@ -39,14 +39,15 @@ public class SplashActivity extends Activity {
 		switch (item.getItemId()) {
                     // Start the WebViewActivity to handle the authentication.
                     case R.id.login:
-                    Intent intent = new Intent().setClass(this,GoogleAccountPrompt.class);
-                    startActivity(intent);
-	    	  
-	        return true;
+                   
+                        Intent intent = new Intent().setClass(this,GoogleAccountPrompt.class);
+                        startActivity(intent);
+                        finish();
+                        return true;
 	      // Exit.
-	      case R.id.exit:
-	        finish();
-	        return true;
+                    case R.id.exit:
+                        finish();
+                        return true;
 	    }
 		return super.onOptionsItemSelected(item);
 	}

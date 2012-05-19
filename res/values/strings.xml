@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, AnActivity!</string>
     <string name="app_name">SmOrg</string>
     <string name="login">Sign In</string>
     <string name="exit">Quit</string>
-
+    <string name="text">We have a menu down there</string>
+    <string name="qadd">Add event</string>
+    <string name="infos">- Quick Add can (almost) read your mind\n- Quick Add can figure out what you mean and pop the new event right onto your calendar.\n- If you have a name of a location that includes a date or time word use quotation marks around the location name.\n- If you enter a time with no date, Quick Add will create the event on the earliest date that puts the event in the future.\n- If you do not enter a start time or end time, Quick Add will create an All Day event.\n- If you do not enter an end time, Quick Add will create a one hour long event.\n- You can specify start and end times using either time ranges or time intervals (for an hour,2:00-3 PM).\n- Multi-day events can be specified using date ranges.\n- If you would like someone added to the guest list, enter his or her email address or name(Will be looked up in your google contacts).\n- Three-letter time zone abbreviations can be recognized following the time.\n- Recurring events, the time expression has three parts: the start, the repetition, and the end.\n- The start could be like (Monday at 8 AM).\n- The repetition use keywords like (weekly,daily,monthly,yearly, every monday,...etc).\n- The End could be like (for 3 weeks, for 9 days,...etc).</string>
+    
 </resources>
