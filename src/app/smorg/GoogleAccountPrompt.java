@@ -13,13 +13,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 
 public class GoogleAccountPrompt extends Activity {
 	
         private static final String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/calendar";
         private static final String PREFS_ACC_NAME = "accountName";
         private static final String PREFS_ACC_TOKEN= "authToken";
+        private String token;
 	private AccountManager accountManager ;
 	private Account account;
         private ProgressDialog progressDialog;
@@ -59,10 +59,10 @@ public class GoogleAccountPrompt extends Activity {
                       try {
                             // If the user has authorized your application to use the calendar API
                             // a token is available.
-                          String token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
+                          token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
                           // Now you can use the  API...
                           Log.d("MyAPP","Token is ready");
-                          Intent intent = new Intent().setClass(GoogleAccountPrompt.this,CalendarAuthorizeActivity.class);
+                          Intent intent = new Intent().setClass(GoogleAccountPrompt.this,CalendarTasks.class);
                           intent.putExtra("token", token);
                           progressDialog.dismiss();
                           startActivity(intent);
@@ -89,7 +89,7 @@ public class GoogleAccountPrompt extends Activity {
 				  dialogFragment.setArguments(arguments);
 				  return dialogFragment;
 			  }
-
+                          
 			@Override
 			public Dialog onCreateDialog(Bundle savedInstanceState) {
 			
