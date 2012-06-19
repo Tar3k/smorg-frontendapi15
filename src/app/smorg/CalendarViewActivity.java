@@ -14,8 +14,13 @@ import android.widget.CalendarView;
  *
  * @author Tarek
  */
-public class CalendarViewActivity extends Activity 
-    implements CalendarView.OnDateChangeListener {
+public class CalendarViewActivity extends Activity
+        implements CalendarView.OnDateChangeListener {
+  
+    
+    private int chosenYear;
+    private int chosenMonth;
+    private int chosenDay;
 
     /**
      * Called when the activity is first created.
@@ -30,21 +35,26 @@ public class CalendarViewActivity extends Activity
 
     public void onSelectedDayChange(CalendarView view, int year, int month,
             int dayOfMonth) {
-        
-       DialogFragment frag = TasksDialog.newInstance(year, month, year, this);
-       frag.show(this.getFragmentManager(), "dialog");
+
+        this.chosenYear = year; 
+        this.chosenMonth = month;
+        this.chosenDay= dayOfMonth;
+        DialogFragment frag = TasksDialog.newInstance(this);
+        frag.show(this.getFragmentManager(), "dialog");
     }
 
     void actionChosen(int which) {
-        Intent intent = new Intent();   
-        if (which == 0 ) //QuickAdd
-            intent.setClass(this,QuickAddActivity.class);
+        Intent intent = new Intent();
+        if (which == 0) //QuickAdd
+        {
+            intent.setClass(this, QuickAddActivity.class);
+        }
         //else if (which == 1) //Create event
-            
-         
-            
-            
-            
-        
+
+
+
+
+
+
     }
 }

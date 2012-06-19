@@ -14,6 +14,10 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 	  
+/**
+ * 
+ * @author Tarek
+ */
 public class AccountsDialog extends DialogFragment {
     
 	private Account account;
@@ -44,9 +48,8 @@ public class AccountsDialog extends DialogFragment {
             }
             
             return new AlertDialog.Builder(
-                getActivity())
-                .setTitle(title)
-                .setItems(names,new DialogInterface.OnClickListener() {
+                    getActivity()).setTitle(title).setItems(names, new DialogInterface.OnClickListener() {
+
                 public void onClick(DialogInterface dialog, int which) {
                     account = accounts[which];
                     callback.accountSelected(account);

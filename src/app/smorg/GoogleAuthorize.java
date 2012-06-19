@@ -15,13 +15,12 @@ import java.util.logging.Logger;
  * @author Tarek
  */
 public class GoogleAuthorize {
-    
+
     private static final String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/calendar";
-    
 
     static String authorize(final SplashActivity activity, Account account) {
         AccountManager accountManager = AccountManager.get(activity);
-        Log.d("MyAPP","Get Authorization");
+        Log.d("MyAPP", "Get Authorization");
         try {
             return accountManager.blockingGetAuthToken(account, AUTH_TOKEN_TYPE, false);
         } catch (Exception ex) {

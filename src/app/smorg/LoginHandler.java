@@ -22,7 +22,7 @@ public class LoginHandler extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         progressDialog = ProgressDialog.show(parent,
-                "Connecting","Authorizing your Google account, Please wait...",
+                "Connecting..","Authorizing your Google account, Please wait...",
                 true,
                 false);
         super.onPreExecute();
@@ -38,7 +38,7 @@ public class LoginHandler extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
         progressDialog.dismiss();
-        parent.authorizationFinished(token);
+        parent.googleAuthorizationFinished(token);
     }
     
 }
