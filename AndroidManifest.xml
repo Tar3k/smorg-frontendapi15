@@ -23,22 +23,12 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".GoogleAccountPrompt"
-           	android:label="@string/app_name" >
-           	</activity>
+        
            	
-          <activity android:name=".GoogleCalendarActivity"
+          <activity android:name=".CalendarViewActivity"
            	android:label="@string/app_name" >
            	</activity>
-                
-          <activity android:name=".CalendarTasks"
-           	android:label="@string/app_name" >
-           	</activity>
-                
-                
-          <activity android:name=".CalendarQuickAddActivity"
-           	android:label="@string/app_name" >
-           	</activity>
+    
                 
      </application>
      

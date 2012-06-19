@@ -16,9 +16,8 @@ import android.widget.EditText;
  *
  * @author Tarek
  */
-public class CalendarQuickAddActivity extends Activity {
+public class QuickAddActivity extends Activity {
 
-    private static final int QUICKADD_EVENT = 200;
    
     private EditText editText;
     private Button button;
@@ -40,18 +39,8 @@ public class CalendarQuickAddActivity extends Activity {
                 public void onClick(View arg0) {
                     
                     event = editText.getText().toString();
-                    finish();
                 }
             });
     }
-
-    @Override
-    public void finish() {
-        Intent data = new Intent();
-        data.putExtra("event", event);
-        setResult(QUICKADD_EVENT,data);
-        super.finish();
-    }
-    
     
 }
