@@ -6,21 +6,20 @@ package app.smorg;
 import android.accounts.Account;
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import com.google.api.services.calendar.Calendar;
 
 public class SplashActivity extends Activity {
 
-    Account account;
-    ProgressDialog progressDialog;
-    String token;
-    boolean authorized;
-    public static final int TOKEN_REQUEST = 1;
+    private Account account;
+    private String token;
+    private boolean authorized;
+    public static Calendar calendarService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,15 +42,18 @@ public class SplashActivity extends Activity {
         new LoginHandler(this, account).execute();
     }
 
-    void authorizationFinished(String token) {
+    void googleAuthorizationFinished(String token) {
         Log.d("MyApp", "authorization finished " + token);
         this.token = token;
         this.authorized = true;
-        Intent intent = new Intent().setClass(this, CalendarViewActivity.class);
-        startActivity(intent);
-        finish();
+        new GoogleCalendarHandler(this,token).execute();
     }
 
+    public String getToken() {
+        return token;
+    }
+    
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -66,4 +68,14 @@ public class SplashActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    void googleCalendarConnected(Calendar calendarService) {
+     SplashActivity.calendarService = calendarService;
+     Log.d("MyApp", "Calendar Service is ready");
+     Intent intent = new Intent()
+             .setClass(this, CalendarViewActivity.class);
+     startActivity(intent);
+    }
+
+   
 }

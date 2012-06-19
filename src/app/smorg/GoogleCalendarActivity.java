@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 public class GoogleCalendarActivity extends Activity {
 
-    final static private String API_KEY = "AIzaSyCNkqhXpMIaQc8A6idFNRXHQYWsaPVNKBY";
     private final static int REQUEST_CAL_TASK = 10;
     private final static int REQUEST_CAL_ACT = 30;
     private static final int CREATE_EVENT = 100;
@@ -54,7 +53,6 @@ public class GoogleCalendarActivity extends Activity {
         accessToken = getIntent().getExtras().getString("token");
         // Setting up Calendar API Service
         setupCalendarConnection();
-        intent.setClass(GoogleCalendarActivity.this, CalendarTasks.class);
         startActivityForResult(intent, REQUEST_CAL_TASK);
 
     }
@@ -85,7 +83,6 @@ public class GoogleCalendarActivity extends Activity {
             @Override
             public void initialize(JsonHttpRequest request) throws IOException {
                 CalendarRequest calendarRequest = (CalendarRequest) request;
-                calendarRequest.setKey(API_KEY);
                 calendarRequest.setOauthToken(getAccessToken());
             }
         }).setHttpRequestInitializer(googleCredential).build();
