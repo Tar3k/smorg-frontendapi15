@@ -36,7 +36,7 @@ public class GoogleCalendarHandler extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        calendarService = GoogleCalendarConnection.connect(parentActivity, token);
+        calendarService = GoogleCalendarConnection.connect(token);
         return null;
     }
 

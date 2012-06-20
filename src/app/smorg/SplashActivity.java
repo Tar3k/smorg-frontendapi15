@@ -20,6 +20,8 @@ public class SplashActivity extends Activity {
     private String token;
     private boolean authorized;
     public static Calendar calendarService;
+    private String calendarIdChosen;
+    private String calendarNameChosen;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,10 +74,20 @@ public class SplashActivity extends Activity {
     void googleCalendarConnected(Calendar calendarService) {
      SplashActivity.calendarService = calendarService;
      Log.d("MyApp", "Calendar Service is ready");
-     Intent intent = new Intent()
+     new CalendarsHandler(this).execute();
+    
+    }
+
+    void googleCalendarChosen(String calendarId, String calendarName) {
+        this.calendarIdChosen= calendarId;   
+        this.calendarNameChosen= calendarName;
+        Log.d("MyApp", calendarIdChosen +":" + calendarNameChosen);
+        startAction();
+    }
+
+    void startAction (){
+         Intent intent = new Intent()
              .setClass(this, CalendarViewActivity.class);
      startActivity(intent);
     }
-
-   
 }

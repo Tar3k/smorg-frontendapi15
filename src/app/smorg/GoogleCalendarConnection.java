@@ -23,7 +23,7 @@ public class GoogleCalendarConnection {
     
     
     
-    static Calendar connect(final SplashActivity parentActivity,final String token){
+    static Calendar connect(final String token){
        Log.d("MyApp", "will build calendar service");
         HttpTransport transport= AndroidHttp.newCompatibleTransport();
         GoogleCredential googleCredential = new GoogleCredential().setAccessToken(token);
