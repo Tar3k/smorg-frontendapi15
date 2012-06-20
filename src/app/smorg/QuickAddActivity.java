@@ -21,14 +21,16 @@ public class QuickAddActivity extends Activity {
     private EditText editText;
     private Button button;
     private String event;
+    private String calendarId;
     /**
+     * 
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         // ToDo add your GUI initialization code here   
-        
+         calendarId = getIntent().getExtras().getString("cid");
          setContentView(R.layout.quick_add_event);
          editText = (EditText) findViewById(R.id.quickadd);
          button = (Button) findViewById(R.id.setEvent);
@@ -38,8 +40,14 @@ public class QuickAddActivity extends Activity {
                 public void onClick(View arg0) {
                     
                     event = editText.getText().toString();
+                    new QuickAddHandler(QuickAddActivity.this)
+                            .execute(calendarId,event);
                 }
             });
+    }
+
+    void eventAdded() {
+        finish();
     }
     
 }

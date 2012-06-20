@@ -21,6 +21,7 @@ public class CalendarViewActivity extends Activity
     private int chosenYear;
     private int chosenMonth;
     private int chosenDay;
+    private String calendarId;
 
     /**
      * Called when the activity is first created.
@@ -28,6 +29,7 @@ public class CalendarViewActivity extends Activity
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        calendarId= getIntent().getExtras().getString("cid");
         setContentView(R.layout.cal);
         CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(this);
@@ -45,9 +47,11 @@ public class CalendarViewActivity extends Activity
 
     void actionChosen(int which) {
         Intent intent = new Intent();
+        intent.putExtra("cid", calendarId);
         if (which == 0) //QuickAdd
         {
             intent.setClass(this, QuickAddActivity.class);
+            startActivity(intent);
         }
         //else if (which == 1) //Create event
 

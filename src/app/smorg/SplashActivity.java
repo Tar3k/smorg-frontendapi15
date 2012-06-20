@@ -87,7 +87,10 @@ public class SplashActivity extends Activity {
 
     void startAction (){
          Intent intent = new Intent()
-             .setClass(this, CalendarViewActivity.class);
+             .setClass(this, CalendarViewActivity.class)
+             .putExtra("cid", calendarIdChosen);
      startActivity(intent);
+     finish();
+     
     }
 }
