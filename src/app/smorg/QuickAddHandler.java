@@ -27,7 +27,8 @@ public class QuickAddHandler extends AsyncTask<String, Void, Void> {
 
     @Override
     protected void onPreExecute() {
-        progressDialog = ProgressDialog.show(parentActivity, "", "", true, false);
+        progressDialog = ProgressDialog.show(parentActivity, "Synchronizing"
+                ,"", true, false);
         super.onPreExecute();
     }
 

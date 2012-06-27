@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CalendarView;
 
 /**
@@ -16,8 +17,7 @@ import android.widget.CalendarView;
  */
 public class CalendarViewActivity extends Activity
         implements CalendarView.OnDateChangeListener {
-  
-    
+
     private int chosenYear;
     private int chosenMonth;
     private int chosenDay;
@@ -29,7 +29,7 @@ public class CalendarViewActivity extends Activity
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        calendarId= getIntent().getExtras().getString("cid");
+        calendarId = getIntent().getExtras().getString("cid");
         setContentView(R.layout.cal);
         CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(this);
@@ -38,9 +38,10 @@ public class CalendarViewActivity extends Activity
     public void onSelectedDayChange(CalendarView view, int year, int month,
             int dayOfMonth) {
 
-        this.chosenYear = year; 
+        this.chosenYear = year;
         this.chosenMonth = month;
-        this.chosenDay= dayOfMonth;
+        this.chosenDay = dayOfMonth;
+        Log.d("MyApp",  chosenYear+":"+chosenMonth+":"+chosenDay);
         DialogFragment frag = TasksDialog.newInstance(this);
         frag.show(this.getFragmentManager(), "dialog");
     }
@@ -52,12 +53,15 @@ public class CalendarViewActivity extends Activity
         {
             intent.setClass(this, QuickAddActivity.class);
             startActivity(intent);
+        } else if (which == 1) //Create event
+        {
+            intent.putExtra("chosenYear", chosenYear);
+            intent.putExtra("chosenMonth", chosenMonth);
+            intent.putExtra("chosenDay", chosenDay);
+            intent.setClass(this, CreateEventActivity.class);
+            startActivity(intent);
+        } else if (which == 2) {
         }
-        //else if (which == 1) //Create event
-
-
-
-
 
 
     }
