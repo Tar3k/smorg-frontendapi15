@@ -41,7 +41,7 @@ public class CalendarViewActivity extends Activity
         this.chosenYear = year;
         this.chosenMonth = month;
         this.chosenDay = dayOfMonth;
-        Log.d("MyApp",  chosenYear+":"+chosenMonth+":"+chosenDay);
+        Log.d("MyApp", chosenYear + ":" + chosenMonth + ":" + chosenDay);
         DialogFragment frag = TasksDialog.newInstance(this);
         frag.show(this.getFragmentManager(), "dialog");
     }
@@ -49,20 +49,18 @@ public class CalendarViewActivity extends Activity
     void actionChosen(int which) {
         Intent intent = new Intent();
         intent.putExtra("cid", calendarId);
+        intent.putExtra("chosenYear", chosenYear);
+        intent.putExtra("chosenMonth", chosenMonth);
+        intent.putExtra("chosenDay", chosenDay);
         if (which == 0) //QuickAdd
         {
             intent.setClass(this, QuickAddActivity.class);
-            startActivity(intent);
         } else if (which == 1) //Create event
         {
-            intent.putExtra("chosenYear", chosenYear);
-            intent.putExtra("chosenMonth", chosenMonth);
-            intent.putExtra("chosenDay", chosenDay);
             intent.setClass(this, CreateEventActivity.class);
-            startActivity(intent);
-        } else if (which == 2) {
+        } else if (which == 2) { //View Events
+            intent.setClass(this, ViewEventsListActivity.class);
         }
-
-
+        startActivity(intent);
     }
 }

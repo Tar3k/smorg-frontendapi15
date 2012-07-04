@@ -37,7 +37,20 @@
         <activity android:name=".QuickAddActivity"
                     android:label="@string/app_name" >
         </activity>
-    
+        
+               	
+        <activity android:name=".ViewEventsListActivity"
+                    android:label="@string/app_name" >
+        </activity>
+        
+        <activity android:name=".CreateGoalActivity"
+                    android:label="@string/app_name" >
+        </activity>
+        
+        <activity android:name=".GoalViewActivity"
+                    android:label="@string/app_name" >
+        </activity>
+        
                 
     </application>
      

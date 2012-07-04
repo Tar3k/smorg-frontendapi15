@@ -20,7 +20,7 @@ import android.os.Bundle;
  */
 public class AccountsDialog extends DialogFragment {
     
-	private Account account;
+	public static Account account;
     private static SplashActivity callback;
     
     public static AccountsDialog newInstance(String title, 
