@@ -1,5 +1,6 @@
 package app.smorg;
 
+import android.app.ProgressDialog;
 import java.io.IOException;
 
 import org.apache.http.HttpResponse;
@@ -12,20 +13,28 @@ import android.util.Log;
 
 import com.smorg.data.Goal;
 
-public class AddGoalHandler extends AsyncTask<Void,Void,Void> {
+public class AddGoalHandler extends AsyncTask<Goal,Void,Void> {
 
 	private DefaultHttpClient client;
-	private Goal goal;
+    private final ProgressDialog progressDialog;
 	
-	public AddGoalHandler(Goal goal){
-		this.goal=  goal;
-		client = new DefaultHttpClient();
+	
+	public AddGoalHandler(ProgressDialog progressDialog){
+        this.progressDialog = progressDialog;
+     	client = new DefaultHttpClient();
 	}
+
+    @Override
+    protected void onPreExecute() {
+        progressDialog.setTitle("Contacting Back-End");
+        progressDialog.show();
+    }
+    
 	@Override
-	protected Void doInBackground(Void... arg0) {
+	protected Void doInBackground(Goal... arg0) {
 		HttpPost postRequest = new HttpPost(Url.BASE_URL + Url.ADD_SERVLET);
 		try {
-			postRequest.setEntity(new SerializableEntity(goal, true));
+			postRequest.setEntity(new SerializableEntity(arg0, true));
 			HttpResponse response = client.execute(postRequest);
 			Log.d("App", response.getEntity().toString());
 		} catch (IOException e) {
@@ -33,5 +42,12 @@ public class AddGoalHandler extends AsyncTask<Void,Void,Void> {
 		}
 		return null;
 	}
+
+    @Override
+    protected void onPostExecute(Void result) {
+        progressDialog.dismiss();
+    }
+    
+    
 
 }

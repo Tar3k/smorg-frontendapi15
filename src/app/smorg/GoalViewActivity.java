@@ -41,7 +41,7 @@ public class GoalViewActivity extends Activity implements OnItemClickListener
         Button syncButton = (Button) findViewById(R.id.g_sync);
         syncButton.setOnClickListener(this);
         
-        goalDAO = new AppEngineDAO();
+        goalDAO = new AppEngineDAO(this);
         goals = goalDAO.getAllGoals(AccountsDialog.account.name);
 		
         listView.setAdapter(new ArrayAdapter<Goal>(this,

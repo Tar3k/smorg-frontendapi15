@@ -1,5 +1,7 @@
 package app.smorg;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -9,19 +11,22 @@ import com.smorg.data.Goal;
 import com.smorg.data.GoalDAO;
 
 public class AppEngineDAO  implements GoalDAO {
+    private  ProgressDialog progressDialog;
 	
 	
-
+    public AppEngineDAO(Context context){
+        progressDialog = new ProgressDialog(context);
+    }
 	@Override
 	public void addGoal(Goal goal) {
-	  new AddGoalHandler(goal).execute();
+	  new AddGoalHandler(progressDialog).execute(goal);
 	}
 
 	@Override
 	public ArrayList<Goal> getAllGoals(String userId) {
 		Log.d("MyAPP", "getting all goals");
 		try {
-			return new GetGoalsHandler().execute(userId).get();
+			return new GetGoalsHandler(progressDialog).execute(userId).get();
 			//Log.d("MyAPP", "finished ASYNC");
 			//return GetGoalsHandler.goal;
 		} catch (InterruptedException e) {

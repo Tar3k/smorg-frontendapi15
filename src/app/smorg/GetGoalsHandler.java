@@ -1,5 +1,6 @@
 package app.smorg;
 
+import android.app.ProgressDialog;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -7,7 +8,6 @@ import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.SerializableEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -21,12 +21,21 @@ public class GetGoalsHandler extends AsyncTask<String, Void, ArrayList<Goal>> {
 
 	private DefaultHttpClient client;
 	public  static ArrayList<Goal> goal;
+    private  ProgressDialog progressDialog;
 
-	public GetGoalsHandler (){
-		client = new DefaultHttpClient();
+    public GetGoalsHandler(ProgressDialog progressDialog) {
+        client = new DefaultHttpClient();
 		Log.d("MyAPP", "getGoalsConstructor");
-		
-	}
+        this.progressDialog = progressDialog;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        progressDialog.setTitle("Fetching Goals from Back-End");
+        progressDialog.show();
+    }
+    
+    
 	@Override
 	protected ArrayList<Goal> doInBackground(String... params) {
 		Log.d("MyAPP", "Do in backgroudn : GetGoals");
@@ -55,7 +64,7 @@ public class GetGoalsHandler extends AsyncTask<String, Void, ArrayList<Goal>> {
 	@Override
 	protected void onPostExecute(ArrayList<Goal> result) {
 		Log.d("MyAPP", "onPostReq : getGoals");
-		
+		progressDialog.dismiss();
 		
 	}
 	

@@ -9,7 +9,7 @@ public class Goal implements Serializable {
 	private Long goalId;
     
     private String userId;
-    private List<Long> eventIds;
+    private List<String> eventIds;
     private String title;
     private String description;
     private Double progress;
@@ -34,10 +34,10 @@ public class Goal implements Serializable {
 		this.userId = userId;
 	}
 	
-	public List<Long> getEventIds() {
+	public List<String> getEventIds() {
 		return eventIds;
 	}
-	public void setEventIds(List<Long> eventIds) {
+	public void setEventIds(List<String> eventIds) {
 		this.eventIds = eventIds;
 	}
 	
@@ -78,8 +78,8 @@ public class Goal implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "{Goal: id = " + getGoalId()
-				+ ", userid = " + getUserId()
-				+ "}";
+		return "" + getTitle()
+				+ "\n Starts On: " + getStartDate()
+				+ "\n Deadline: " + getDeadline();
 	}
 }

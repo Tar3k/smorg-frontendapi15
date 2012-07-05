@@ -63,7 +63,7 @@ public class CreateGoalActivity extends Activity implements OnClickListener {
 		goal.setDescription(goalDescription.getText().toString());
 		goal.setUserId(AccountsDialog.account.name);
 		
-		new AppEngineDAO().addGoal(goal);
+		new AppEngineDAO(this).addGoal(goal);
 
 		
 	}

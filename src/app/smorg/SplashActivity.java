@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import com.google.api.services.calendar.Calendar;
-import java.util.TimeZone;
 
 public class SplashActivity extends Activity {
 
@@ -28,6 +27,7 @@ public class SplashActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
     }
 
     @Override
@@ -42,7 +42,10 @@ public class SplashActivity extends Activity {
     void accountSelected(Account account) {
         this.account = account;
         Log.d("MyApp", "account chosen: " + account.toString());
-        new LoginHandler(this, account).execute();
+       Intent intent = new Intent();
+        intent.setClass(this,GoalViewActivity.class);
+        startActivity(intent);
+        // new LoginHandler(this, account).execute();
     }
 
     void googleAuthorizationFinished(String token) {
