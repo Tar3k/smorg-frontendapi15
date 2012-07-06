@@ -29,6 +29,10 @@
                     android:label="@string/app_name" >
         </activity>
         
+         <activity android:name=".HomeTabsActivity"
+                    android:label="@string/app_name" >
+        </activity>
+        
         <activity android:name=".CreateEventActivity"
                     android:label="@string/app_name" >
         </activity>

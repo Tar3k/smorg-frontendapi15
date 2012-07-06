@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/goal_create" android:title="@string/goal_create" />
+    <item android:id="@+id/goal_sync" android:title="@string/goal_sync" />
+</menu>

@@ -5,7 +5,9 @@
 package app.smorg;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,8 +24,10 @@ import java.util.logging.Logger;
  *
  * @author Tarek
  */
-public class ViewEventsListActivity extends Activity implements OnItemClickListener{
+public class ViewEventsListActivity extends Activity implements OnItemClickListener {
+
     private Events events;
+    public ArrayList<Event> event;
 
     /**
      * Called when the activity is first created.
@@ -31,28 +35,33 @@ public class ViewEventsListActivity extends Activity implements OnItemClickListe
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setContentView(R.layout.events_view);       
+        setContentView(R.layout.events_view);
         ListView listView = (ListView) findViewById(R.id.e_list);
-		listView.setAdapter(new ArrayAdapter<Event>(this,
-				android.R.layout.simple_list_item_1,getEvents(
-                getIntent().getExtras().getInt("chosenYear")              
-                ,getIntent().getExtras().getInt("chosenMonth")
-                ,getIntent().getExtras().getInt("chosenDay")
-                ,getIntent().getExtras().getString("cid"))));
-		listView.setOnItemClickListener(this);
-	}
+        listView.setAdapter(new ArrayAdapter<EventView>(this,
+                android.R.layout.simple_list_item_1, getEvents(SplashActivity.calendarIdChosen)));
+        listView.setOnItemClickListener(this);
 
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
-			}
+    }
 
-    private ArrayList<Event> getEvents(int year, int month, int day, String cid){
-        
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+        DialogFragment frag = EventTasksDialog.newInstance(this);
+        frag.show(this.getFragmentManager(), "dialog");
+    }
+
+    private ArrayList<EventView> getEvents(String cid) {
+
+        ArrayList<EventView> eventView = new ArrayList<EventView>();
         try {
             events = new GetEventsHandler(this).execute(cid).get();
-            return (ArrayList<Event>) events.getItems();
-         
+            event = new ArrayList<Event>(events.getItems());
+            Log.d("MyAPP", event.toString());
+            for (Event e : event) {
+                eventView.add(new EventView(e));
+            }
+            Log.d("MyAPP", eventView.toString());
+            return eventView;
+
         } catch (InterruptedException ex) {
             Logger.getLogger(ViewEventsListActivity.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
@@ -60,5 +69,8 @@ public class ViewEventsListActivity extends Activity implements OnItemClickListe
         }
         return null;
     }
+
+    void actionChosen(int which) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
-    

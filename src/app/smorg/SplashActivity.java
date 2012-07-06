@@ -20,7 +20,7 @@ public class SplashActivity extends Activity {
     private String token;
     private boolean authorized;
     public static Calendar calendarService;
-    private String calendarIdChosen;
+    public static String calendarIdChosen;
     private String calendarNameChosen;
 
     @Override
@@ -42,10 +42,7 @@ public class SplashActivity extends Activity {
     void accountSelected(Account account) {
         this.account = account;
         Log.d("MyApp", "account chosen: " + account.toString());
-       Intent intent = new Intent();
-        intent.setClass(this,GoalViewActivity.class);
-        startActivity(intent);
-        // new LoginHandler(this, account).execute();
+        new LoginHandler(this, account).execute();
     }
 
     void googleAuthorizationFinished(String token) {
@@ -63,12 +60,13 @@ public class SplashActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.login:
+            case R.id.user_login:
+                Log.d("MyAPP", "FE EHHHH");
                 DialogFragment newFragment =
                         AccountsDialog.newInstance("Choose an account", this);
                 newFragment.show(this.getFragmentManager(), "dialog");
                 return true;
-            case R.id.exit:
+            case R.id.quit:
                 finish();
                 return true;
         }
@@ -91,8 +89,7 @@ public class SplashActivity extends Activity {
 
     void startAction (){
          Intent intent = new Intent()
-             .setClass(this, CalendarViewActivity.class)
-             .putExtra("cid", calendarIdChosen);
+             .setClass(this, HomeTabsActivity.class);
      startActivity(intent);
      finish();
      

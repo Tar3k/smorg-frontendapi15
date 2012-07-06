@@ -40,6 +40,7 @@ public class TasksDialog extends DialogFragment
     }
 
     public void onClick(DialogInterface dialog, int which) {
+        dialog.dismiss();
         parentClass.actionChosen(which);
 
     }

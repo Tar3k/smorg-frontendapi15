@@ -26,56 +26,56 @@ public class Goal implements Serializable {
 	public void setGoalId(Long goalId) {
 		this.goalId = goalId;
 	}
-	
+
 	public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+
 	public List<String> getEventIds() {
 		return eventIds;
 	}
 	public void setEventIds(List<String> eventIds) {
 		this.eventIds = eventIds;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public Double getProgress() {
 		return progress;
 	}
 	public void setProgress(Double progress) {
 		this.progress = progress;
 	}
-	
+
 	public Date getStartDate() {
 		return startDate;
 	}
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	
+
 	public Date getDeadline() {
 		return deadline;
 	}
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "" + getTitle()

@@ -29,15 +29,15 @@ public class CreateGoalActivity extends Activity implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        goalTitle = (EditText) findViewById(R.id.e_title);
-        goalStartDate = (DatePicker) findViewById(R.id.e_dateStart);
-        goalStartTime = (TimePicker) findViewById(R.id.e_timeStart);
-        goalEndDate = (DatePicker) findViewById(R.id.e_dateEnd);
-        goalEndTime = (TimePicker) findViewById(R.id.e_timeEnd);
-        goalDescription = (EditText) findViewById(R.id.e_description);
+        setContentView(R.layout.goal_create);
+        goalTitle = (EditText) findViewById(R.id.g_title);
+        goalStartDate = (DatePicker) findViewById(R.id.g_dateStart);
+        goalStartTime = (TimePicker) findViewById(R.id.g_timeStart);
+        goalEndDate = (DatePicker) findViewById(R.id.g_dateEnd);
+        goalEndTime = (TimePicker) findViewById(R.id.g_timeEnd);
+        goalDescription = (EditText) findViewById(R.id.g_description);
 
-        Button button = (Button) findViewById(R.id.create_e_button);
+        Button button = (Button) findViewById(R.id.create_g_button);
         button.setOnClickListener(this);
     }
 
@@ -64,7 +64,11 @@ public class CreateGoalActivity extends Activity implements OnClickListener {
 		goal.setUserId(AccountsDialog.account.name);
 		
 		new AppEngineDAO(this).addGoal(goal);
+        
 
 		
 	}
+    void end(){
+        
+    }
 }

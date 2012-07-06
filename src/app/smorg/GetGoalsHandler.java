@@ -19,13 +19,13 @@ import com.smorg.data.Goal;
 
 public class GetGoalsHandler extends AsyncTask<String, Void, ArrayList<Goal>> {
 
-	private DefaultHttpClient client;
-	public  static ArrayList<Goal> goal;
+    private DefaultHttpClient client;
+    public  static ArrayList<Goal> goal;
     private  ProgressDialog progressDialog;
 
     public GetGoalsHandler(ProgressDialog progressDialog) {
         client = new DefaultHttpClient();
-		Log.d("MyAPP", "getGoalsConstructor");
+        Log.d("MyAPP", "getGoalsConstructor");
         this.progressDialog = progressDialog;
     }
 
@@ -36,38 +36,40 @@ public class GetGoalsHandler extends AsyncTask<String, Void, ArrayList<Goal>> {
     }
     
     
-	@Override
-	protected ArrayList<Goal> doInBackground(String... params) {
-		Log.d("MyAPP", "Do in backgroudn : GetGoals");
-		HttpPost postRequest = new HttpPost(Url.BASE_URL + Url.GET_SERVLET);
-		try {
-			
-			postRequest.setEntity(new SerializableEntity(params, true));
-			HttpResponse response = client.execute(postRequest);
-			InputStream isr = response.getEntity().getContent();
-			ObjectInputStream reader = new ObjectInputStream(isr);
-			goal = (ArrayList<Goal>) reader.readObject();
-			Log.d("MyAPP", goal.size()+ "");
-			//Log.d("MyAPP", goal.toString());
-			return goal;
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		Log.d("MyAPP", "end of do in background : getGoals");
-		return null;
-	}
+    @Override
+    protected ArrayList<Goal> doInBackground(String... params) {
+        Log.d("MyAPP", "Do in backgroudn : GetGoals");
+        HttpPost postRequest = new HttpPost(Url.BASE_URL + Url.GET_SERVLET);
+        try {
+            
+            postRequest.setEntity(new SerializableEntity(params[0], true));
+            Log.d("MyApp", params +"");
+            Log.d("MyAPP", params[0]+ "");
+            HttpResponse response = client.execute(postRequest);
+            InputStream isr = response.getEntity().getContent();
+            ObjectInputStream reader = new ObjectInputStream(isr);
+            goal =  (ArrayList<Goal>) reader.readObject();
+            Log.d("MyAPP", goal.size()+ "");
+            //Log.d("MyAPP", goal.toString());
+            return goal;
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Log.d("MyAPP", "end of do in background : getGoals");
+        return null;
+    }
 
-	@Override
-	protected void onPostExecute(ArrayList<Goal> result) {
-		Log.d("MyAPP", "onPostReq : getGoals");
-		progressDialog.dismiss();
-		
-	}
-	
-	
+    @Override
+    protected void onPostExecute(ArrayList<Goal> result) {
+        Log.d("MyAPP", "onPostReq : getGoals");
+        progressDialog.dismiss();
+        
+    }
+    
+    
 
 }

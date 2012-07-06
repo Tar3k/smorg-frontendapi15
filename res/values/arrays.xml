@@ -8,6 +8,10 @@ and open the template in the editor.
     <string-array name="calendarTasks">
         <item>Quick Add Event</item>  
         <item>Create Event</item>
-        <item>View Events</item>
+    </string-array>
+    
+    <string-array name="event_tasks">
+        <item>Add to Goal</item>
+        <item>Edit Event</item>
     </string-array>
 </resources>

@@ -20,4 +20,8 @@ public interface GoalDAO extends Serializable{
      * matches Goal
      */
     public void removeGoal(Long goalId);
+    
+    public void addEventToGoal(Long goalId,String eventId);
+    
+    public ArrayList<String> getGoalEvents (Long goalId);
 }

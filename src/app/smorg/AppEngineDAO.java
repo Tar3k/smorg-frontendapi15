@@ -2,13 +2,11 @@ package app.smorg;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
 import android.util.Log;
-
 import com.smorg.data.Goal;
 import com.smorg.data.GoalDAO;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class AppEngineDAO  implements GoalDAO {
     private  ProgressDialog progressDialog;
@@ -16,6 +14,7 @@ public class AppEngineDAO  implements GoalDAO {
 	
     public AppEngineDAO(Context context){
         progressDialog = new ProgressDialog(context);
+        
     }
 	@Override
 	public void addGoal(Goal goal) {
@@ -44,4 +43,12 @@ public class AppEngineDAO  implements GoalDAO {
 		// TODO Auto-generated method stub
 		
 	}
+
+    public void addEventToGoal(Long goalId, String eventId) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public ArrayList<String> getGoalEvents(Long goalId) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

@@ -31,10 +31,10 @@ public class AddGoalHandler extends AsyncTask<Goal,Void,Void> {
     }
     
 	@Override
-	protected Void doInBackground(Goal... arg0) {
+	protected Void doInBackground(Goal... args) {
 		HttpPost postRequest = new HttpPost(Url.BASE_URL + Url.ADD_SERVLET);
 		try {
-			postRequest.setEntity(new SerializableEntity(arg0, true));
+			postRequest.setEntity(new SerializableEntity(args[0], true));
 			HttpResponse response = client.execute(postRequest);
 			Log.d("App", response.getEntity().toString());
 		} catch (IOException e) {

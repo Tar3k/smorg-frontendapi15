@@ -47,6 +47,7 @@ public class CalendarsDialog extends DialogFragment
     
 
     public void onClick(DialogInterface dialog, int which) {
+        dialog.dismiss();
         parentActivity.googleCalendarChosen(calendarId[which],calendarName[which]);
     }
     
