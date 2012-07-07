@@ -10,6 +10,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.smorg.data.Goal;
 
@@ -17,11 +18,13 @@ public class AddGoalHandler extends AsyncTask<Goal,Void,Void> {
 
 	private DefaultHttpClient client;
     private final ProgressDialog progressDialog;
+    
 	
 	
 	public AddGoalHandler(ProgressDialog progressDialog){
         this.progressDialog = progressDialog;
      	client = new DefaultHttpClient();
+        
 	}
 
     @Override

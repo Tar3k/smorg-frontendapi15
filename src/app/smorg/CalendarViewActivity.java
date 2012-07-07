@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package app.smorg;
 
 import android.app.Activity;
@@ -10,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CalendarView;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -30,6 +28,8 @@ public class CalendarViewActivity extends Activity
         super.onCreate(icicle);
         setContentView(R.layout.cal);
         CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendarView.setDate(calendar.getTime().getTime());
         calendarView.setOnDateChangeListener(this);
     }
 
@@ -56,7 +56,7 @@ public class CalendarViewActivity extends Activity
         } else if (which == 1) //Create event
         {
             intent.setClass(this, CreateEventActivity.class);
-        } 
+        }
         startActivity(intent);
     }
 }

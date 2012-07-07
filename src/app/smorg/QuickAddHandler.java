@@ -18,10 +18,10 @@ import java.util.logging.Logger;
 public class QuickAddHandler extends AsyncTask<String, Void, Void> {
 
     private final QuickAddActivity parentActivity;
-    private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog; 
 
     public QuickAddHandler(QuickAddActivity parentActivity) {
-
+        
         this.parentActivity = parentActivity;
     }
 

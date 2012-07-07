@@ -3,6 +3,7 @@ package app.smorg;
 import android.accounts.Account;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 
 /**
  *
@@ -31,6 +32,7 @@ public class LoginHandler extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         token = GoogleAuthorize.authorize(parent, account);
+        Log.d("MyAPP",token);
         return null;
     }
     

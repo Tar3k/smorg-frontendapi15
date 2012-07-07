@@ -15,9 +15,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.smorg.data.Goal;
 import com.smorg.data.GoalDAO;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -67,10 +71,27 @@ public class GoalViewActivity extends Activity implements OnItemClickListener {
     private void setup() {
         setContentView(R.layout.goals_view);
         ListView listView = (ListView) findViewById(R.id.g_list);
+        TextView text = (TextView) findViewById(R.id.nogoals);
+        text.setVisibility(View.INVISIBLE);
         goalDAO = new AppEngineDAO(this);
         goals = goalDAO.getAllGoals(AccountsDialog.account.name);
-        listView.setAdapter(new ArrayAdapter<Goal>(this,
-                android.R.layout.simple_list_item_1, goals));
-        listView.setOnItemClickListener(this);
+        Date now = GregorianCalendar.getInstance().getTime();
+        if (goals != null) {
+            listView.setAdapter(new ArrayAdapter<Goal>(this,
+                    android.R.layout.simple_list_item_1, goals));
+            listView.setOnItemClickListener(this);
+            
+        } else {
+           
+            text.setVisibility(View.VISIBLE);
+        }
+        Toast.makeText(this,"Last Sync: "+ now.toString(), Toast.LENGTH_LONG);
+
+    }
+    
+    @Override
+    protected void onResume() {
+        setup();
+        super.onResume();
     }
 }

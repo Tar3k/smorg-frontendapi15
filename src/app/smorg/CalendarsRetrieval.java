@@ -4,6 +4,7 @@
  */
 package app.smorg;
 
+import android.util.Log;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.CalendarList;
 import com.google.api.services.calendar.model.CalendarListEntry;
@@ -22,6 +23,7 @@ public class CalendarsRetrieval {
         
         ArrayList<String> calendarId = new ArrayList<String>();
         try {
+            Log.d("MyAPP","retrieving id: CalendarsRetrieval");
             CalendarList calendarList = calendarService.calendarList().list().execute();
             
             while(true){
@@ -45,6 +47,7 @@ public class CalendarsRetrieval {
         
         ArrayList<String> calendarName = new ArrayList<String>();
         try {
+            Log.d("MyAPP","Retrieving names: CalendarsRetrieval");
             CalendarList calendarList = calendarService.calendarList().list().execute();
             
             while(true){

@@ -43,7 +43,6 @@ public class GetGoalsHandler extends AsyncTask<String, Void, ArrayList<Goal>> {
         try {
             
             postRequest.setEntity(new SerializableEntity(params[0], true));
-            Log.d("MyApp", params +"");
             Log.d("MyAPP", params[0]+ "");
             HttpResponse response = client.execute(postRequest);
             InputStream isr = response.getEntity().getContent();

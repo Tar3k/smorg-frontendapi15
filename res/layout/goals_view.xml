@@ -13,5 +13,12 @@
         android:layout_height="fill_parent" >
     </ListView>
     
+    <TextView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="25dp"
+    android:text="No Goals found on Cloud...You can Create a new one"
+    android:id="@+id/nogoals"
+    />
+    
     
 </LinearLayout>
