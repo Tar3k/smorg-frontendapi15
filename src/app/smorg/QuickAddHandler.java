@@ -19,6 +19,7 @@ public class QuickAddHandler extends AsyncTask<String, Void, Void> {
 
     private final QuickAddActivity parentActivity;
     private ProgressDialog progressDialog; 
+    private boolean isDone = false;
 
     public QuickAddHandler(QuickAddActivity parentActivity) {
         
@@ -36,8 +37,10 @@ public class QuickAddHandler extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... params) {
         try {
             SplashActivity.calendarService.events().quickAdd(params[0], params[1]).execute();
+            isDone = true;
         } catch (IOException ex) {
             Logger.getLogger(QuickAddHandler.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return null;
     }
@@ -45,8 +48,13 @@ public class QuickAddHandler extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         progressDialog.dismiss();
-        Toast.makeText(parentActivity, "Event added", Toast.LENGTH_SHORT).show();
-        parentActivity.eventAdded();
+        
+        if ( isDone = true){
+            Toast.makeText(parentActivity, "Event added", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(parentActivity, "Unable to add event", Toast.LENGTH_SHORT).show();
+            parentActivity.eventAdded();
+        }
         super.onPostExecute(result);
     }
 }

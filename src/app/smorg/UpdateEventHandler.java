@@ -21,9 +21,12 @@ import java.util.logging.Logger;
 public class UpdateEventHandler extends AsyncTask<Event, Void, Void> {
 
     private final ProgressDialog progressDialog;
-    private Toast toast;
+    private Toast finishToast;
+    private Toast errorToast;
+    private boolean isDone = false ;
     public UpdateEventHandler(Context context) {
-        toast = new Toast(context);
+        finishToast = Toast.makeText(context, "Done..", Toast.LENGTH_LONG);
+        errorToast =Toast.makeText(context, "Unable to update", Toast.LENGTH_LONG);
         progressDialog = new ProgressDialog(context);
     }
 
@@ -42,10 +45,12 @@ public class UpdateEventHandler extends AsyncTask<Event, Void, Void> {
             SplashActivity.calendarService.events().update(SplashActivity.calendarIdChosen,
                     params[0].getId(),
                     params[0]).execute();
-            toast.setText("Event Updated");
+            isDone= true;
+            
         } catch (IOException ex) {
             Logger.getLogger(CreateEventHandler.class.getName()).log(Level.SEVERE, null, ex);
-            toast.setText("Couldn't Update");
+            isDone = false;
+         
         }
 
         return null;
@@ -54,10 +59,12 @@ public class UpdateEventHandler extends AsyncTask<Event, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         Log.d("MyApp", "PostExecute : uptadeEventHandler");
+        if(isDone = true){
+                finishToast.show();
+        }else{
+               errorToast.show();
+        }
         progressDialog.dismiss();
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.show();
-        
         super.onPostExecute(result);
     }
 }

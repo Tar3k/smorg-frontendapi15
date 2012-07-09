@@ -18,20 +18,20 @@ public class CreateEventHandler extends AsyncTask<Event, Void, Void> {
     private final CreateEventActivity parentActivity;
     private ProgressDialog progressDialog;
     private final String calendarId;
-    private Toast toast;
+    private boolean isDone = false;
 
     public CreateEventHandler(CreateEventActivity parentActivity, String calendarId) {
         Log.d("MyApp", "Constructor : CreateEventHandler");
         this.parentActivity = parentActivity;
         this.calendarId = calendarId;
-        toast = new Toast(parentActivity);
 
     }
 
     @Override
     protected void onPreExecute() {
         Log.d("MyApp", "PreExecute : CreateEventHandler");
-        progressDialog = ProgressDialog.show(parentActivity, "Synchronizing...", "", true, false);
+        progressDialog = ProgressDialog.show(parentActivity,
+                "Synchronizing...", "", true, false);
         super.onPreExecute();
     }
 
@@ -40,10 +40,12 @@ public class CreateEventHandler extends AsyncTask<Event, Void, Void> {
         Log.d("MyApp", "doInBackground : CreateEventHandler");
         try {
             SplashActivity.calendarService.events().insert(calendarId, params[0]).execute();
-            toast.setText("Event Added");
+            isDone = true;
+
         } catch (IOException ex) {
             Logger.getLogger(CreateEventHandler.class.getName()).log(Level.SEVERE, null, ex);
-            toast.setText("Unable to add event");
+            isDone = false;
+
         }
 
         return null;
@@ -53,9 +55,14 @@ public class CreateEventHandler extends AsyncTask<Event, Void, Void> {
     protected void onPostExecute(Void result) {
         Log.d("MyApp", "PostExecute : CreateEventHandler");
         progressDialog.dismiss();
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.show();
-        parentActivity.eventAdded();
+
+        if (isDone = true) {
+            Toast.makeText(parentActivity, "Event Added", Toast.LENGTH_LONG).show();
+            parentActivity.eventAdded();
+        } else {
+            Toast.makeText(parentActivity, "Unable to add event", Toast.LENGTH_LONG).show();
+            
+        }
         super.onPostExecute(result);
     }
 }

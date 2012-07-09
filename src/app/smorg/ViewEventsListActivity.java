@@ -34,7 +34,7 @@ public class ViewEventsListActivity extends Activity implements OnItemClickListe
     public ArrayList<Event> event;
     private int whichEvent;
     private ArrayList<EventView> eventToView;
-    private Toast toast;
+
 
     /**
      * Called when the activity is first created.
@@ -42,7 +42,6 @@ public class ViewEventsListActivity extends Activity implements OnItemClickListe
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-       toast = new Toast(this);
         setup();
 
     }
@@ -53,18 +52,17 @@ public class ViewEventsListActivity extends Activity implements OnItemClickListe
 
         ListView listView = (ListView) findViewById(R.id.e_list);
         eventToView = getEvents(SplashActivity.calendarIdChosen);
-        if (eventToView != null && eventToView.size() < 0) {
+        if (eventToView != null && eventToView.size() > 0) {
             Date now = GregorianCalendar.getInstance().getTime();
-            toast.setText("Last Sync: "+ now.toString());
+            Toast.makeText(this,"Last Sync: "+ now.toString(), Toast.LENGTH_SHORT).show();
             listView.setAdapter(new ArrayAdapter<EventView>(this,
                     android.R.layout.simple_list_item_1, eventToView));
             listView.setOnItemClickListener(this);
             
         }else {
-            toast.setText("Unable to fetch events");
+            Toast.makeText(this, "Could not Retrieve Events", Toast.LENGTH_SHORT).show();
         }
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.show();
+       
     }
 
     @Override
@@ -100,7 +98,7 @@ public class ViewEventsListActivity extends Activity implements OnItemClickListe
         intent.putExtra("id", event.get(whichEvent).getId());
         switch (which) {
             case (0):
-                intent.setClass(this, GoalEventActivity.class);
+                //intent.setClass(this, GoalEventActivity.class);
                 break;
             case (1):
                 intent.putExtra("summary", event.get(whichEvent).getSummary());

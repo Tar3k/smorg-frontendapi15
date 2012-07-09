@@ -15,6 +15,7 @@ public class AppEngineDAO  implements GoalDAO {
     public AppEngineDAO(Context context){
         progressDialog = new ProgressDialog(context);
         
+        
     }
 	@Override
 	public void addGoal(Goal goal) {
@@ -40,8 +41,7 @@ public class AppEngineDAO  implements GoalDAO {
 
 	@Override
 	public void removeGoal(Long goalId) {
-		// TODO Auto-generated method stub
-		
+		new RemoveGoalHandler(progressDialog).execute(goalId);
 	}
 
     public void addEventToGoal(Long goalId, String eventId) {

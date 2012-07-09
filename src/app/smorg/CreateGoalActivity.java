@@ -65,6 +65,8 @@ public class CreateGoalActivity extends Activity implements OnClickListener {
 		
 		new AppEngineDAO(this).addGoal(goal);
         
+        
+        
 
 		
 	}

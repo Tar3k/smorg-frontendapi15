@@ -7,6 +7,7 @@ package app.smorg;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,7 +31,7 @@ import java.util.GregorianCalendar;
 public class GoalViewActivity extends Activity implements OnItemClickListener {
 
     private GoalDAO goalDAO;
-    private ArrayList<Goal> goals;
+    public ArrayList<Goal> goals;
 
     /**
      * Called when the activity is first created.
@@ -66,6 +67,20 @@ public class GoalViewActivity extends Activity implements OnItemClickListener {
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Goal goal = goals.get(position);
+        Intent intent = new Intent();
+        intent.setClass(this, GoalActivity.class);
+        Log.d("MyAPP","Just clicked:"+
+                "starts on: "+ goal.getStartDate() 
+                + "ends: " +goal.getDeadline() 
+                +"event ids:" + goal.getEventIds() );
+        intent.putExtra("title", goal.getTitle());
+        intent.putExtra("start", goal.getStartDate().toString());
+        intent.putExtra("end", goal.getDeadline().toString());
+        intent.putExtra("id", goal.getGoalId());
+        intent.putExtra("events", goal.getEventIds()
+                .toArray(new String[goal.getEventIds().size()]));
+        startActivity(intent);
+        
     }
 
     private void setup() {
@@ -80,12 +95,14 @@ public class GoalViewActivity extends Activity implements OnItemClickListener {
             listView.setAdapter(new ArrayAdapter<Goal>(this,
                     android.R.layout.simple_list_item_1, goals));
             listView.setOnItemClickListener(this);
+             Toast.makeText(this,"Last Sync: "+ now.toString(), Toast.LENGTH_LONG);
             
         } else {
            
             text.setVisibility(View.VISIBLE);
+             Toast.makeText(this,"Last Sync: "+ now.toString(), Toast.LENGTH_LONG);
         }
-        Toast.makeText(this,"Last Sync: "+ now.toString(), Toast.LENGTH_LONG);
+       
 
     }
     
